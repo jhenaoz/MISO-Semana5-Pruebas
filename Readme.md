@@ -6,8 +6,8 @@
 
 ## Funcionalidades
 
-- Login
-- Creacion de Posts
-- Creacion de Paginas
-- Creacion de Tags
-- Agregar Staff/Colaboradores
+- Login (juan)
+- Creacion de Posts (zully)
+- Creacion de Paginas (sebas)
+- Creacion de Tags (sebas)
+- Agregar Staff/Colaboradores (javier)
