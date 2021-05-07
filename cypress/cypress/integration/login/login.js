@@ -6,9 +6,7 @@ Given('I open ghost page', () => {
 })
 
 When(`I login with {string} and password {string}`, (username, password) => {
-    cy.get('#ember8').click().type(username);
-    cy.get('#ember10').click().type(password);
-    cy.get('#ember12').click();
+  cy.login(username,password)
 })
 
 Then(`I see {string} in the page`, (error) => {
