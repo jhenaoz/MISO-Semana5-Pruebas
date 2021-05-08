@@ -27,10 +27,6 @@ Then(`I see {string} in the page`, (error) => {
     cy.get('div').contains(error)
 })
 
-Then(`I see {string} notification in the page`, (error) => {
-    cy.get('.gh-notifications').contains(error)
-})
-
 Given('I open ghost staff page to invite people with email in use', () => {
     cy.visit(url2)
 })
@@ -57,5 +53,13 @@ When(`I reset password with old password {string} and new password {string}`, (o
     cy.get('button > span').contains('Saved').click();
 })
 
+When(`I go to the bio from specific user and write {string}`, (text) => {
+    cy.get('#user-bio').click({force: true}).clear();
+    cy.get('#user-bio').click({force: true}).type(text);
+    cy.get('button > span').contains('Save').click();
+})
 
+Then(`I see in the bio {string}`, (error) => {
+    cy.get('#user-bio').should('have.value', error)
+})
 

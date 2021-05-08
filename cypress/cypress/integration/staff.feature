@@ -29,11 +29,9 @@ Feature: Ghost staff Page
 
 
     @focus
-    Scenario: Change staff password 
+    Scenario: Change staff bio 
         Given I open ghost staff page in specific user
         When I login with "admin-user@mailsac.com" and password "Test4echo!"
         Then I go to the staff page in specific user 
-        When I change password with old password "Test4echo!" and new password "F@kenewp@ssw0rd.1234"
-        Then I see "Password updated." in the page
-        When I reset password with old password "F@kenewp@ssw0rd.1234" and new password "Test4echo!"
-        Then I see "Password updated." notification in the page
+        When I go to the bio from specific user and write "Test BIO" 
+        Then I see in the bio "Test BIO"
