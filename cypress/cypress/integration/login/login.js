@@ -1,6 +1,6 @@
 import { Given, Then, When } from "cypress-cucumber-preprocessor/steps";
 
-const url = 'http://localhost:2368/ghost/#/signin'
+const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
 Given('I open ghost page', () => {
   cy.visit(url)
 })

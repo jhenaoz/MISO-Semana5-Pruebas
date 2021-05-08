@@ -1,8 +1,8 @@
 import { Given, Then, When } from "cypress-cucumber-preprocessor/steps";
 
-const url = 'http://localhost:2368/ghost/#/staff'
-const url2 = 'http://localhost:2368/ghost/#/signin'
-const url3 = 'http://localhost:2368/ghost/#/staff/javier'
+const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/staff'
+const url2 = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
+const url3 = 'https://ghost3-3-0.herokuapp.com/ghost/#/staff/admin'
 Given('I open ghost staff page to invite people', () => {
     cy.visit(url2)
 })
@@ -25,6 +25,10 @@ When(`I invite people with {string} and role {string}`, (email, role) => {
 
 Then(`I see {string} in the page`, (error) => {
     cy.get('div').contains(error)
+})
+
+Then(`I see {string} notification in the page`, (error) => {
+    cy.get('.gh-notifications').contains(error)
 })
 
 Given('I open ghost staff page to invite people with email in use', () => {
