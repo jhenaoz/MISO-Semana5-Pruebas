@@ -14,7 +14,4 @@ Feature: Login Main Page
     Given I open ghost page
     When I login with "staff-user@mailsac.com" and password "Test4echo!"
     Then I am not able to see admin section in the home page
-  # Scenario: Login with invalid credentials
-  #   Given I open ghost page
-  #   When I login with "admin-user@mailsac.com" and password "Test4echo"
-  #   Then I see "Your password is incorrect." in page
+
