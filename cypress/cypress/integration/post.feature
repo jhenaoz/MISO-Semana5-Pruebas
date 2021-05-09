@@ -1,19 +1,24 @@
 Feature: Google Post Page
 
     I want to open ghost app
-  
-    @focus
     Scenario: Created a post
-        Given I open ghost post page to create one
-        When I login with "z.alarcon@uniandes.edu.co" and password "m4d1zus42302"
-        Then I go to the post page
+        Given I open ghost page
+        When I login with "admin-user@mailsac.com" and password "Test4echo!"
         When I create a post with title "Post Test" and body "Cuerpo texto"
-    
-    @focus
+        Then The post "Post Test" should be created
+    Scenario: Update a post
+        Given I open ghost page
+        When I login with "admin-user@mailsac.com" and password "Test4echo!"
+        When I change title with old text "Post Test" for new text "Post Test 2"
+        Then The post "Post Test" should be updated
     Scenario: Publish a post
-        Given I open ghost post page in publish specific post
-        When I login with "z.alarcon@uniandes.edu.co" and password "m4d1zus42302"
-        Then I go to the post page in publish specific post 
-        When I change title with old text "Post Test" and new text "Post Test 2"
-        Then I see "Published" in the page
+        Given I open ghost page
+        When I login with "admin-user@mailsac.com" and password "Test4echo!"
+        When I published a specific post with title "Post Test"
+        Then The post "Post Test" should be published
+    Scenario: Delete a post
+        Given I open ghost page
+        When I login with "admin-user@mailsac.com" and password "Test4echo!"
+        When I delete a "Post Test"
+        Then The post "Post Test" should not be found
 
