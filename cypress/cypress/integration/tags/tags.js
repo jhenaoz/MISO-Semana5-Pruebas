@@ -19,11 +19,27 @@ When(`I create a new tag with the name {string}`, (tagName) => {
   cy.get('button').contains('Save').click();
 });
 
+
+When('I delete an internal tag {string}', (tagName) => {
+  cy.reload()
+  cy.visit(internalTagUrl);
+  cy.get('.gh-tag-list-name').contains(tagName).click();
+  cy.get('button').contains('Delete tag').click();
+  cy.get('.modal-footer > button').contains('Delete').click();
+});
+
 When('I delete a {string}', (tagName) => {
   cy.visit(tagsUrl);
   cy.get('.gh-tag-list-name').contains(tagName).click();
   cy.get('button').contains('Delete tag').click();
   cy.get('.modal-footer > button').contains('Delete').click();
+});
+
+
+Then('The internal tag {string} should not be present', () => {
+  cy.reload()
+  cy.visit(internalTagUrl);
+  cy.get('h3').contains("You haven't created any internal tags yet!")
 });
 
 Then('The tag {string} should not be present', () => {
@@ -36,8 +52,8 @@ Then('The tag {string} should be created', (tagName) => {
 });
 
 Then('The internal tag {string} should be created', (tagName) => {
-  cy.visit(tagsUrl);
-  cy.get('[data-ember-action-152="152"] > span').click();
+  cy.reload()
+  cy.visit(internalTagUrl);
   cy.get('.gh-tag-list-name').contains(tagName);
 });
 
