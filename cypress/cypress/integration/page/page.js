@@ -1,4 +1,4 @@
-import { Given, Then, When, After } from "cypress-cucumber-preprocessor/steps";
+import { Given, Then, When, Before } from "cypress-cucumber-preprocessor/steps";
 
 const url1 = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
 const urlPage = 'https://ghost3-3-0.herokuapp.com/ghost/#/pages';
@@ -27,7 +27,7 @@ Then('The page {string} should be created', (postTitle) => {
 
 // I change title with old text "Post Test" for new text "Post Test 2"
 When('I change title with old text {string} for new text {string}', (oldTitle, newTitle) => {
-    cy.get('[href="#/pages/"]:nth(1)').click({force: true});
+    cy.get('[href="#/pages/"]').click({force: true});
     cy.get('.gh-post-list-title').contains(oldTitle).click({force: true});
     cy.get('.gh-editor-title').click({force: true}).clear();
     cy.get('.gh-editor-title').click({force: true}).type(newTitle);
@@ -60,7 +60,7 @@ When('I delete a {string}', (pageTitle) => {
     cy.visit(urlPage);
     cy.get('.gh-post-list-title').contains(pageTitle).click({force: true});
     cy.get('.post-settings').click();
-    cy.get('button > span').contains('Delete post').click();
+    cy.get('button > span').contains('Delete page').click();
     cy.get('.modal-footer > button').contains('Delete').click();
 });
 
@@ -68,6 +68,6 @@ Then('The page {string} should not be found', () => {
     cy.get('h3').contains("You haven't created any pages yet!")
 });
 
-After(() => {
-    cy.deletePages();
-  });
+Before(() => {
+  cy.deletePages();
+});

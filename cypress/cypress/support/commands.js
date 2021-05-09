@@ -57,20 +57,11 @@ Cypress.Commands.add('deletePages', () => {
   });
   
   api.pages.browse({limit: 10})
-    .then(pages => pages.forEach(page => {
-      api.pages.delete({id: page.id});
-    }))
-    .catch(error => console.error(error));
+    .then((pages) => {
+      pages.forEach((page) => {
+        console.log('PAGE', page.id);
+        api.pages.delete({id: page.id})
+      })
+    })
+  .catch(error => console.error(error))
 }) 
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
