@@ -41,7 +41,8 @@ Then('The post {string} should be updated', (postTitle) => {
 When('I published a specific post with title {string}', (postTitle) => {
     cy.get('[href="#/posts/"]').click({force: true});
     cy.get('.gh-post-list-title').contains(postTitle).click({force: true});
-    cy.get('.gh-publishmenu-radio-content').contains('Set it live now').click();
+    cy.get('.view-actions').contains('Publish').click();
+    // cy.get('.gh-publishmenu-dropdown > .gh-publishmenu-radio').contains('Set it live now').click();
     cy.get('button > span').contains('Publish').click();
 })
 
