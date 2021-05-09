@@ -1,5 +1,9 @@
 {
   "chromeWebSecurity": false,
   "testFiles": "**/*.{feature,features}",
-  "projectId": "tgpzqx"
+  "projectId": "tgpzqx",
+  "retries": {
+    "runMode": 2,
+    "openMode": 0
+  }
 }
