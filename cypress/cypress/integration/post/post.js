@@ -27,7 +27,7 @@ Then('The post {string} should be created', (postTitle) => {
 
 // I change title with old text "Post Test" for new text "Post Test 2"
 When('I change title with old text {string} for new text {string}', (oldTitle, newTitle) => {
-    cy.get('[href="#/posts/"]').click({force: true});
+    cy.get('[href="#/posts/"]:nth(1)').click({force: true});
     cy.get('.gh-post-list-title').contains(oldTitle).click({force: true});
     cy.get('.gh-editor-title').click({force: true}).clear();
     cy.get('.gh-editor-title').click({force: true}).type(newTitle);

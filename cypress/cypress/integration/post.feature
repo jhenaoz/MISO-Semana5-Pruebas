@@ -9,6 +9,7 @@ Feature: Ghots Post Page
     Scenario: Update a post
         Given I open ghost page
         When I login with "admin-user@mailsac.com" and password "Test4echo!"
+        When I create a post with title "Post Test" and body "Cuerpo texto"
         When I change title with old text "Post Test" for new text "Post Test 2"
         Then The post "Post Test" should be updated
     Scenario: Publish a post
