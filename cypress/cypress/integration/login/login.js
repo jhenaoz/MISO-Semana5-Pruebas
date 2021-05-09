@@ -24,3 +24,4 @@ Then(`I see admin section in the home page`, (usermail) => {
 Then(`I am not able to see admin section in the home page`, (usermail) => {
   cy.get('.gh-nav-settings > .gh-nav-list-h').should('not.exist');
 })
+

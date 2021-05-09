@@ -1,4 +1,4 @@
-Feature: Google Main Page
+Feature: Ghost tags Page
 
   I want to open ghost app
 #Given (precondiciones) usuario admin, tags page
