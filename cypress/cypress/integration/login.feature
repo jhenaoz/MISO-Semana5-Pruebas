@@ -1,4 +1,4 @@
-Feature: Google Main Page
+Feature: Login Main Page
 
   I want to open ghost app
 
@@ -14,3 +14,4 @@ Feature: Google Main Page
     Given I open ghost page
     When I login with "staff-user@mailsac.com" and password "Test4echo!"
     Then I am not able to see admin section in the home page
+

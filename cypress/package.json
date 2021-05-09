@@ -4,13 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cypress run"
+    "test": "cypress run --record --key 920f7798-ae3e-4c6c-85a5-2b22f38cdfcd"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@tryghost/admin-api": "^1.4.1",
-    "cypress": "^7.2.0",
     "cypress-cucumber-preprocessor": "^4.1.0"
   },
   "cypress-cucumber-preprocessor": {
