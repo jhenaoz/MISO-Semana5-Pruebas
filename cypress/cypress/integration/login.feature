@@ -1,4 +1,4 @@
-Feature: Google Main Page
+Feature: Login Main Page
 
   I want to open ghost app
 
