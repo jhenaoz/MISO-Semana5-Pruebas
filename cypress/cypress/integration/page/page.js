@@ -38,9 +38,8 @@ Then('The page {string} should be updated', (postTitle) => {
     cy.get('.gh-post-list-title').contains(postTitle);
 });
 
-// I published a specific post with title "Post Test"
-When('I published a specific post with title {string}', (pageTitle) => {
-    cy.get('[href="#/pages/"]:nth(1)').click({force: true});
+When('I published a specific page with title {string}', (pageTitle) => {
+    cy.get('[href="#/pages/"]').click({force: true});
     cy.get('.gh-post-list-title').contains(pageTitle).click({force: true});
     cy.get('.view-actions').contains('Publish').click();
     // cy.get('.gh-publishmenu-dropdown > .gh-publishmenu-radio').contains('Set it live now').click();
