@@ -54,7 +54,7 @@ Then('The post {string} should be published', (postTitle) => {
 // I delete a "Post Test"
 When('I delete a {string}', (postTitle) => {
     cy.visit(urlPost);
-    cy.get('.gh-list').contains(postTitle).click({force: true});
+    cy.get('.gh-post-list-title').contains(postTitle).click({force: true});
     cy.get('.post-settings').click();
     cy.get('button > span').contains('Delete post').click();
     cy.get('.modal-footer > button').contains('Delete').click();
