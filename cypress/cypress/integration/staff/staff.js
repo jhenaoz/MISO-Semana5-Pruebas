@@ -3,6 +3,7 @@ import { Given, Then, When } from "cypress-cucumber-preprocessor/steps";
 const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/staff'
 const url2 = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
 const url3 = 'https://ghost3-3-0.herokuapp.com/ghost/#/staff/admin'
+
 Given('I open ghost staff page to invite people', () => {
     cy.visit(url2)
 })
