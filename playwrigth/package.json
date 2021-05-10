@@ -12,6 +12,7 @@
     "playwright": "^1.10.0"
   },
   "dependencies": {
-    "jasmine": "^3.7.0"
+    "jasmine": "^3.7.0",
+    "jasmine-spec-reporter": "^7.0.0"
   }
 }
