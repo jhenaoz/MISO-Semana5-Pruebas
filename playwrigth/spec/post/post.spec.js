@@ -25,7 +25,6 @@ describe('Given I open ghost page', () => {
     describe('I create a post with title "Post Test" and body "Cuerpo texto"', () => {
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
-            await page.goto(urlPost);
             await page.screenshot({path: './post-page.png'});
             await page.goto(urlEPost);
             await postPage.post('Post Test', 'Cuerpo texto');
@@ -33,6 +32,7 @@ describe('Given I open ghost page', () => {
         });
 
         it('Then The post "Post Test" should be created', async () => {
+            await page.goto(urlPost);
             const text = await page.textContent('.gh-post-list-title');
             expect(text).toContain('Post Test');
         });
@@ -42,8 +42,6 @@ describe('Given I open ghost page', () => {
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
             await page.goto(urlPost);
-            await page.screenshot({path: './post-page.png'});
-
             await postPage.search('Post Test');
             await postPage.post('Post Test 2', 'Cuerpo texto 2');
             await page.screenshot({path: './post-page-update.png'});
@@ -60,7 +58,6 @@ describe('Given I open ghost page', () => {
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
             await page.goto(urlPost);
-            await page.screenshot({path: './post-page.png'});
             await postPage.publish('Post Test 2');
             await page.screenshot({path: './post-page-publish.png'});
         });
@@ -76,7 +73,6 @@ describe('Given I open ghost page', () => {
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
             await page.goto(urlPost);
-            await page.screenshot({path: './post-page.png'});
             await postPage.remove('Post Test 2');
             await page.screenshot({path: './post-page-delete.png'});
         });
