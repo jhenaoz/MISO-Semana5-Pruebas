@@ -10,7 +10,7 @@ describe('Given I open ghost page', () => {
     let page;
     let page2;
     let loginPage;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL =200000
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000
 
     beforeEach(async () => {
         browser = await playwright['chromium'].launch();
@@ -28,26 +28,26 @@ describe('Given I open ghost page', () => {
         });
 
 
-        describe('When I go to the staff page',  () => {
+        describe('When I go to the staff page', () => {
             beforeEach(async () => {
                 await page2.goto(url);
-                await page2.click("button");
-                await page2.screenshot({path: './pagina4.png'})
+                await page2.click(".gh-btn-green > span");
+                await page2.screenshot({ path: './pagina4.png' })
                 await page2.fill('#new-user-email', 'pruebas@pruebas.com');
                 await page.selectOption('#new-user-role', 'Administrator');
                 await page2.click(":has-text(\"Send invitation now\")");
-                await page2.screenshot({path: './pagina2.png'})
+                await page2.screenshot({ path: './pagina2.png' })
             });
-            
+
             it('Then I see "Error sending email!" in page', async () => {
                 const text = await page2.textContent('div');
                 expect(text).toBe('Error sending email!');
-                await page2.screenshot({path: './pagina3.png'})
+                await page2.screenshot({ path: './pagina3.png' })
             });
-        
+
         });
-        
-        
+
+
     });
 
     afterEach(async () => {
