@@ -54,6 +54,19 @@ describe('Given I open ghost page', () => {
                 expect("Page Test").toBe(textContent.trim());
             });
 
+            describe('I change title with old text "Page Test" for new text "Page Test 2"', () => {
+                beforeEach(async () => {
+                    await pagePageObject.updatePage('Page Test', 'Page Test2', 'Page Body');
+                });
+                it('The page "Page Test" should be updated', async ()=> {
+                    
+                    const updatedPage = await page.$('text=Page Test2');
+                    if(updatedPage) {
+                        expect(true).toBe(true);
+                    }
+                });
+            });
+
             describe('When I delete a "Page Test"', () => {
                 beforeEach(async () => {
                     await pagePageObject.deletePage('Page Test');

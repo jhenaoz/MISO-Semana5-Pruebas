@@ -3,6 +3,13 @@ class Page {
         this.page = page;
       }
 
+    async updatePage(oldPageTitle, title, body) {
+        await this.page.click(`h3.gh-content-entry-title:has-text("${oldPageTitle}")`);
+        await this.page.fill('textarea', title);
+        await this.page.fill('.koenig-editor__editor', body);
+        await this.page.click('a:has-text("Pages")');
+    }
+
     async deletePage(pageTitle) {
         await this.page.click(`h3.gh-content-entry-title:has-text("${pageTitle}")`);
         await this.page.click('.post-settings');
