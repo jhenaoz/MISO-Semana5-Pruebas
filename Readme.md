@@ -3,6 +3,24 @@
 - Sebastian Noreña Marquez: s.norenam@uniandes.edu.co
 - Zully Alarcon: z.alarcon@uniandes.edu.co
 - Juan David Henao: j.henaoz@uniandes.edu.co 
+## Como ejecutar el proyecto
+
+Cypress:
+```shell
+  cd cypress
+  npm i
+  npx cypress open
+```
+Ejecutar las pruebas:
+![image](https://user-images.githubusercontent.com/2055110/117755826-96766980-b1e2-11eb-9094-f1c71a17ad5e.png)
+
+Playwright
+```shell
+  cd playwright
+  npm i
+  npm test
+```
+
 
 ## Funcionalidades
 
