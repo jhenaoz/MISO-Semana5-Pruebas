@@ -22,10 +22,6 @@ describe('Given I open ghost page', () => {
         dashboardPage = new Dashboard(page);
         pagePageObject= new Page(page);
         await page.goto(url);
-    });
-
-    afterEach(async () => {
-        await context.close();
         const api = new GhostAdminAPI({
             url: 'https://ghost3-3-0.herokuapp.com',
             // Admin API key goes here
@@ -33,14 +29,14 @@ describe('Given I open ghost page', () => {
             version: 'v3'
         });
         
-        api.pages.browse({limit: 10})
-          .then((pages) => {
-            pages.forEach((page) => {
-              console.log('PAGE', page.id);
-              api.pages.delete({id: page.id})
-            })
-          })
-        .catch(error => console.error(error))
+        const pages = await api.pages.browse({limit: 10})
+        pages.forEach(async (page) => {
+            await api.pages.delete({id: page.id})
+        });
+    });
+
+    afterEach(async () => {
+        await context.close();
     });
 
     describe('When i login as an admin user', () => {
@@ -51,12 +47,23 @@ describe('Given I open ghost page', () => {
         describe('I create a page with title "Page Test" and body "Cuerpo texto"', () => {
             beforeEach(async () => {
                 await dashboardPage.navigateToPages();
+                await pagePageObject.createPage('Page Test', 'Cuerpo texto');
             });
             it('The page "Page Test" should be created', async () => {
-                await pagePageObject.createPage('Page Test', 'Cuerpo texto');
                 const textContent = await page.textContent('h3.gh-content-entry-title:has-text("Page Test")')
                 expect("Page Test").toBe(textContent.trim());
             });
+
+            describe('When I published a specific page with title "Page Test"', () => {
+                beforeEach(async () => {
+                    await pagePageObject.publishPage('Page Test');
+                });
+                it('The page "Post Test" should be published', async ()=> {
+                    const notification = await page.$$('.gh-notifications');
+                    expect(1).toBe(notification.length);
+                });
+            })
+
         });
 
     });
