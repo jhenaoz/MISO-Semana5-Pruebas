@@ -13,14 +13,21 @@ class Staff {
     }
     async revoke() {
         await this.page.click('.red-hover');
-        // await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(3000);
         return true;
     }
-    async changePassword(oldPassword,newPassword) {
+    async changePassword(oldPassword, newPassword) {
         await this.page.fill('#user-password-old', oldPassword);
         await this.page.fill('#user-password-new', newPassword);
         await this.page.fill('#user-new-password-verification', newPassword);
         await this.page.click(".gh-btn-red > span");
+        await this.page.waitForTimeout(3000);
+        return true;
+    }
+    async changeBio(bio) {
+        //await this.page.fill('#user-bio', '');
+        await this.page.fill('#user-bio', bio);
+        await this.page.click(".gh-btn-blue > span");
         await this.page.waitForTimeout(3000);
         return true;
     }
