@@ -16,7 +16,7 @@ describe('Given I open ghost page Tags', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000
 
     beforeEach(async () => {
-        browser = await playwright['chromium'].launch();     
+        browser = await playwright['chromium'].launch({headless:false});     
         context = await browser.newContext({recordVideo: { dir: 'videos/' } });//{ 
         page = await context.newPage();
         loginPage = new Login(page);
@@ -47,16 +47,12 @@ describe('Given I open ghost page Tags', () => {
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
             let text = await page.textContent('.gh-user-email');
-
-          
-            //const text = await page.textContent('.site-wrapper');
             await page.goto(tagsUrl);
             await page.screenshot({path: './tags-page.png'});
             text = await page.textContent('#tag-name');
             await tagsPage.create(nameTag);
             await page.goto(tagsUrlBase);
             text = await page.click('text=\'Public tags\'');
-            
             await page.screenshot({path: './tags-page-create.png'});
         });
 
@@ -66,24 +62,30 @@ describe('Given I open ghost page Tags', () => {
         });
     });
 
-    
-
-   /* describe('I delete a "Tags Test"', () => {
+    describe('I delete an internal tag a "Tags Test"', () => {
+        let nameTag = 'Tags Test';
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
+            let text = await page.textContent('.gh-user-email');
             await page.goto(tagsUrl);
-            await page.screenshot({path: './tags-page.png'});
-            await tagsPage.delete('Tags Test');
+            text = await page.textContent('#tag-name');
+            await tagsPage.create(nameTag);
+            await page.goto(tagsUrlBase);
+            text = await page.click('text=\'Public tags\'');
+            text = await page.click('.gh-tag-list-name:has-text(\''+nameTag+'\')');
+            await tagsPage.delete(nameTag);
             await page.screenshot({path: './tags-page-delete.png'});
+            await page.goto(tagsUrlBase);
+            await page.screenshot({path: './tags-page-delete_.png'});       
         });
 
-        it('The post "Tags Test" should not be found', async () => {
-            await page.goto(tagsUrl);
-            const text = await page.textContent('.gh-tag-list-name');
+        it('The tag "Tags Test" should not be found', async () => {
+            await page.goto(tagsUrlBase);
+            const text = await page.textContent('.gh-tags-placeholder');
             expect(text).not.toContain('Tags Test');
         });
     });
-*/
+
     afterEach(async () => {
         console.log('Browser Context Closed!')
         await context.close();
