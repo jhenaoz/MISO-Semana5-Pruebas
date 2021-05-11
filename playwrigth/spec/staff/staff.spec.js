@@ -5,7 +5,7 @@ const urlStaff = 'https://ghost3-3-0.herokuapp.com/ghost/#/staff'
 const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
 const url3 = 'https://ghost3-3-0.herokuapp.com/ghost/#/staff/admin'
 
-fdescribe('Given I open ghost page', () => {
+describe('Given I open ghost page', () => {
     let browser;
     let context;
     let page;
