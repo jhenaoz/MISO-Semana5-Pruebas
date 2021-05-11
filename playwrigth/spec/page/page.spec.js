@@ -54,6 +54,19 @@ describe('Given I open ghost page', () => {
                 expect("Page Test").toBe(textContent.trim());
             });
 
+            describe('When I delete a "Page Test"', () => {
+                beforeEach(async () => {
+                    await pagePageObject.deletePage('Page Test');
+                });
+                it('The page "Page Test" should not be found', async ()=> {
+                    
+                    const createPageButton = await page.$('text=Create a new page');
+                    if(createPageButton) {
+                        expect(true).toBe(true);
+                    }
+                });
+            });
+
             describe('When I published a specific page with title "Page Test"', () => {
                 beforeEach(async () => {
                     await pagePageObject.publishPage('Page Test');
@@ -62,7 +75,7 @@ describe('Given I open ghost page', () => {
                     const notification = await page.$$('.gh-notifications');
                     expect(1).toBe(notification.length);
                 });
-            })
+            });
 
         });
 

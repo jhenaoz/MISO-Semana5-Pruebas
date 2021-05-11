@@ -3,6 +3,13 @@ class Page {
         this.page = page;
       }
 
+    async deletePage(pageTitle) {
+        await this.page.click(`h3.gh-content-entry-title:has-text("${pageTitle}")`);
+        await this.page.click('.post-settings');
+        await this.page.click('.settings-menu-delete-button');
+        await this.page.click('.gh-btn-red');
+    }
+
     async publishPage(pageTitle) {
         await this.page.click(`h3.gh-content-entry-title:has-text("${pageTitle}")`);
         await this.page.click('text=Publish');
