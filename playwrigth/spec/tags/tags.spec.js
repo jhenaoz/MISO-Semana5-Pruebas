@@ -16,7 +16,7 @@ describe('Given I open ghost page Tags', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000
 
     beforeEach(async () => {
-        browser = await playwright['chromium'].launch({headless:false});     
+        browser = await playwright['chromium'].launch();     
         context = await browser.newContext({recordVideo: { dir: 'videos/' } });//{ 
         page = await context.newPage();
         loginPage = new Login(page);
