@@ -5,7 +5,7 @@ const GhostAdminAPI = require('@tryghost/admin-api');
 const { Page } = require('../../src/page.page')
 const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
 
-fdescribe('Given I open ghost page', () => {
+describe('Given I open ghost page', () => {
     let browser;
     let context;
     let page;
