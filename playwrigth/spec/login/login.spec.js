@@ -24,7 +24,6 @@ describe('Given I open ghost page', () => {
     describe('When i login as an admin user', () => {
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
-            await page.screenshot({path: './pagina.png'})
         });
 
         it('Then I see "admin-user@mailsac.com" in the home page', async () => {
