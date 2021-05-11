@@ -17,10 +17,13 @@ describe('Given I open ghost page', () => {
         await page.goto(url);
     });
 
-    describe('When i login as and admin user', () => {
+    afterEach(async () => {
+        await context.close();
+    });
+
+    describe('When i login as an admin user', () => {
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
-            await page.screenshot({path: './pagina.png'})
         });
 
         it('Then I see "admin-user@mailsac.com" in the home page', async () => {
@@ -28,10 +31,24 @@ describe('Given I open ghost page', () => {
 
             expect(text).toBe('admin-user@mailsac.com');
         });
+
+        it('Then I see admin section in the home page', async () => {
+            const text = await page.textContent('.gh-user-email');
+            const settingsSection = await page.textContent('.gh-nav-settings>.gh-nav-list-h');
+            expect(settingsSection).toBe('Settings');
+            expect(text).toBe('admin-user@mailsac.com');
+        });
     });
 
-    afterEach(async () => {
-        console.log('Browser Context Closed!')
-        await context.close();
+    describe('When i login as an editor user', () => {
+        beforeEach(async () => {
+            await loginPage.login('staff-user@mailsac.com', 'Test4echo!');
+        });
+
+        it('Then I see "staff-user@mailsac.com" in the home page', async () => {
+            const text = await page.textContent('.gh-user-email');
+            
+            expect(text).toBe('staff-user@mailsac.com');
+        });
     });
 });
