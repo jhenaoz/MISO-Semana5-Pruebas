@@ -11,6 +11,7 @@ describe('Given I open ghost page', () => {
     let context;
     let page;
     let loginPage;
+    let postPage;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000
 
     beforeEach(async () => {
@@ -22,10 +23,9 @@ describe('Given I open ghost page', () => {
         await page.goto(url);
     });
 
-    describe('I create a post with title "Post Test" and body "Cuerpo texto"', () => {
+    describe('When I create a post with title "Post Test" and body "Cuerpo texto"', () => {
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
-            await page.goto(urlPost);
             await page.screenshot({path: './post-page.png'});
             await page.goto(urlEPost);
             await postPage.post('Post Test', 'Cuerpo texto');
@@ -33,58 +33,64 @@ describe('Given I open ghost page', () => {
         });
 
         it('Then The post "Post Test" should be created', async () => {
+            await page.goto(urlPost);
             const text = await page.textContent('.gh-post-list-title');
             expect(text).toContain('Post Test');
         });
     });
 
-    describe('I change title with old text "Post Test" for new text "Post Test 2"', () => {
+    describe('When I change title with old text "Post Test 1" for new text "Post Test 2"', () => {
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
-            await page.goto(urlPost);
-            await page.screenshot({path: './post-page.png'});
+            await page.goto(urlEPost);
+            await postPage.post('Post Test 1', 'Cuerpo texto 1');
 
-            await postPage.search('Post Test');
+            await page.goto(urlPost);
+            await postPage.search('Post Test 1');
             await postPage.post('Post Test 2', 'Cuerpo texto 2');
             await page.screenshot({path: './post-page-update.png'});
         });
 
-        it('Then The post "Post Test" should be updated', async () => {
+        it('Then the post "Post Test" should be updated', async () => {
             await page.goto(urlPost);
             const text = await page.textContent('.gh-post-list-title');
             expect(text).toContain('Post Test 2');
         });
     });
 
-    describe('I published a specific post with title "Post Test 2"', () => {
+    describe('When I published a specific post with title "Post Test 3"', () => {
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
+            await page.goto(urlEPost);
+            await postPage.post('Post Test 3', 'Cuerpo texto 3');
+
             await page.goto(urlPost);
-            await page.screenshot({path: './post-page.png'});
-            await postPage.publish('Post Test 2');
+            await postPage.publish('Post Test 3');
             await page.screenshot({path: './post-page-publish.png'});
         });
 
-        it('Then The post "Post Test 2" should be published', async () => {
+        it('Then the post "Post Test 3" should be published', async () => {
             await page.goto(urlPost);
             const text = await page.textContent('.gh-post-list-status');
             expect(text).toContain('Published');
         });
     });
 
-    describe('I delete a "Post Test 2"', () => {
+    describe('When I delete a "Post Test 4"', () => {
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
+            await page.goto(urlEPost);
+            await postPage.post('Post Test 4', 'Se va a borrar');
+
             await page.goto(urlPost);
-            await page.screenshot({path: './post-page.png'});
-            await postPage.remove('Post Test 2');
+            await postPage.remove('Post Test 4');
             await page.screenshot({path: './post-page-delete.png'});
         });
 
-        it('The post "Post Test 2" should not be found', async () => {
+        it('Then the post "Post Test 4" should not be found', async () => {
             await page.goto(urlPost);
             const text = await page.textContent('.gh-post-list-title');
-            expect(text).not.toContain('Post Test 2');
+            expect(text).not.toContain('Post Test 4');
         });
     });
 
