@@ -18,6 +18,7 @@ class Post {
         await this.page.click(`text=${postTitle}`);
         await this.page.click('.view-actions');
         await this.page.click('.gh-publishmenu-button > span');
+        await this.page.waitForTimeout(2000);
         return true;
     }
 

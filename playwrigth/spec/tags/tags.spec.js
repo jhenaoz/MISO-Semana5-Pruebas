@@ -4,6 +4,7 @@ const { Tags } = require('../../src/tags.page')
 
 const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin';
 const tagsUrl = 'https://ghost3-3-0.herokuapp.com/ghost/#/tags';
+const tagsNewUrl = 'https://ghost3-3-0.herokuapp.com/ghost/#/tags/new/';
 const internalTagUrl = 'https://ghost3-3-0.herokuapp.com/ghost/#/tags?type=internal';
 
 describe('Given I open ghost page', () => {
@@ -11,12 +12,11 @@ describe('Given I open ghost page', () => {
     let context;
     let page;
     let loginPage;
+    let tagsPage;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000
 
     beforeEach(async () => {
-        browser = await playwright['chrome'].launch(   {headless: false});
-           
-            
+        browser = await playwright['chromium'].launch();
         context = await browser.newContext({ recordVideo: { dir: 'videos/' } });
         page = await context.newPage();
         
@@ -27,7 +27,7 @@ describe('Given I open ghost page', () => {
     describe('I create a tags with title "Tags Test" and body "Cuerpo texto"', () => {
         beforeEach(async () => {
             await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
-            await page.goto(tagsUrl);
+            await page.goto(tagsNewUrl);
             //await page.goto(internalTagUrl);
             await page.screenshot({path: './tags-page.png'});
             await tagsPage.create('Tags Test');
@@ -35,12 +35,11 @@ describe('Given I open ghost page', () => {
         });
 
         it('Then The tags "Tags Test" should be created', async () => {
+            await page.goto(tagsUrl);
             const text = await page.textContent('.gh-tag-list-name');
             expect(text).toContain('Tags Test');
         });
     });
-
-    
 
    /* describe('I delete a "Tags Test"', () => {
         beforeEach(async () => {
@@ -57,8 +56,8 @@ describe('Given I open ghost page', () => {
             expect(text).not.toContain('Tags Test');
         });
     });
-*/
-    afterEach(async () => {
+    */
+   afterEach(async () => {
         console.log('Browser Context Closed!')
         await context.close();
     });
