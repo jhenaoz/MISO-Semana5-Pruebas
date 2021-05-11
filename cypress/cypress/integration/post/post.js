@@ -70,10 +70,9 @@ When('I published a draft post with title {string}', (postTitle) => {
     cy.visit(urlDraft)
     cy.get('.gh-post-list-title').contains(postTitle).click({force: true});
     cy.get('.view-actions').contains('Publish').click();
-    // cy.get('.gh-publishmenu-dropdown > .gh-publishmenu-radio').contains('Set it live now').click();
     cy.get('button > span').contains('Publish').click();
 });
 
 After(() => {
     cy.deletePost();
-  });
+});
