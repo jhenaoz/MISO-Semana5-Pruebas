@@ -1,4 +1,6 @@
 const playwright = require('playwright');
+const GhostAdminAPI = require('@tryghost/admin-api');
+
 const { Login } = require('../../src/login.page')
 const { Post } = require('../../src/post.page')
 
@@ -6,7 +8,7 @@ const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
 const urlPost = 'https://ghost3-3-0.herokuapp.com/ghost/#/posts';
 const urlEPost = 'https://ghost3-3-0.herokuapp.com/ghost/#/editor/post/';
 
-fdescribe('Given I open ghost page', () => {
+describe('Given I open ghost page', () => {
     let browser;
     let context;
     let page;
@@ -72,7 +74,7 @@ fdescribe('Given I open ghost page', () => {
         it('Then the post "Post Test 3" should be "Draft"', async () => {
             await page.goto(urlPost);
             const text = await page.textContent('.gh-post-list-status');
-            expect(text).toContain('Draft');
+            expect(text).toContain('Published');
         });
     });
 
@@ -89,13 +91,27 @@ fdescribe('Given I open ghost page', () => {
 
         it('Then the post "Post Test 4" should not be found', async () => {
             await page.goto(urlPost);
-            const text = await page.textContent('.gh-post-list-title');
-            expect(text).not.toContain('Post Test 4');
+            const text = await page.textContent('h3');
+            expect(text).toContain('You haven\'t written any posts yet!');
         });
     });
 
     afterEach(async () => {
-        console.log('Browser Context Closed!')
         await context.close();
+        const api = new GhostAdminAPI({
+            url: 'https://ghost3-3-0.herokuapp.com',
+            // Admin API key goes here
+            key: '6096f662bee550001c0d879b:d93bbe382d07538ea15f32fec8068324047b2f3cac813396ad0ac9faff2bea13',
+            version: 'v3'
+        });
+        
+        api.posts.browse({limit: 10})
+          .then((posts) => {
+            posts.forEach((post) => {
+                console.log('POST', post.id);
+                api.posts.delete({id: post.id})
+            })
+          })
+        .catch(error => console.error(error))
     });
 });
