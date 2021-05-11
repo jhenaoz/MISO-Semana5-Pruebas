@@ -71,7 +71,7 @@ describe('Given I open ghost page', () => {
             await page.screenshot({path: './post-page-publish.png'});
         });
 
-        it('Then the post "Post Test 3" should be "Draft"', async () => {
+        it('Then the post "Post Test 3" should be "Published"', async () => {
             await page.goto(urlPost);
             const text = await page.textContent('.gh-post-list-status');
             expect(text).toContain('Published');
