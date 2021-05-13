@@ -17,6 +17,7 @@
     "@tryghost/admin-api": "^1.4.2",
     "config": "^3.3.6",
     "jasmine": "^3.7.0",
-    "jasmine-spec-reporter": "^7.0.0"
+    "jasmine-spec-reporter": "^7.0.0",
+    "util": "^0.12.3"
   }
 }
