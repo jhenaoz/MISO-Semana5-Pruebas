@@ -12,13 +12,16 @@
               {
                 "emailUser":".gh-user-email",
                 "tagName":"#tag-name",
-                "publicTags":"text='Public tags'",
-                "listTagsName":".gh-tag-list-name"
+                "publicTags":"text=Public tags",
+                "listTagsName":".gh-tag-list-name",
+                "textSave":"text=Save"
               },
               "delete":
               {
                  "tagsPlaceHolder":".gh-tags-placeholder",
-                 "listTagsNameItem":".gh-tag-list-name:has-text('%s')"
+                 "listTagsNameItem":".gh-tag-list-name:has-text('%s')",
+                 "button":"button:has-text('Delete tag')",
+                 "modal":".modal-footer > button:has-text('Delete')"
               }
            }
          
