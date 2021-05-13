@@ -9,7 +9,7 @@ const urlLogin = `${url}/#/signin`;
 const tagsUrl = `${url}/#/tags/new`;
 const tagsUrlBase = `${url}/#/tags`;
 const internalTagUrl = `${url}/#/tags?type=internal`;
-fdescribe('Given I open ghost page Tags', () => {
+describe('Given I open ghost page Tags', () => {
     let browser;
     let context;
     let page;
