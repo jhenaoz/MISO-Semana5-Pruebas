@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine",
+    "test3.42.5": "NODE_ENV=3.42.5 jasmine",
+    "test3.3.0": "NODE_ENV=3.3.0 jasmine"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +15,7 @@
   },
   "dependencies": {
     "@tryghost/admin-api": "^1.4.2",
+    "config": "^3.3.6",
     "jasmine": "^3.7.0",
     "jasmine-spec-reporter": "^7.0.0"
   }
