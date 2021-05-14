@@ -1,6 +1,5 @@
 const playwright = require('playwright');
 const config = require('config');
-const util = require('util');
 const { Login } = require('../../src/login.page')
 const { Tags } = require('../../src/tags.page')
 const GhostAdminAPI = require('@tryghost/admin-api');
@@ -17,7 +16,7 @@ fdescribe('Given I open ghost page Tags', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000
 
     beforeEach(async () => {
-        browser = await playwright['chromium'].launch({headless: true});     
+        browser = await playwright['chromium'].launch();     
         context = await browser.newContext({recordVideo: { dir: 'videos/' } });//{ 
         page = await context.newPage();
         loginPage = new Login(page);
@@ -50,12 +49,12 @@ fdescribe('Given I open ghost page Tags', () => {
             await loginPage.login(config.adminUser.email, config.adminUser.password);
             let text = await page.textContent('.gh-user-email');
             await page.goto(tagsUrl);
-            await page.screenshot({path: './tags-page.png'});
+            await page.screenshot({path: `${config.imagePath}/tags-page.png`});
             text = await page.textContent('#tag-name');
             await tagsPage.create(nameTag);
             await page.goto(tagsUrlBase);
             text = await page.click('text=\'Public tags\'');
-            await page.screenshot({path: './tags-page-create.png'});
+            await page.screenshot({path:`${config.imagePath}/tags-page-create.png`});
         });
 
         it('Then The tags "Tags Test" should be created', async () => {
@@ -76,9 +75,9 @@ fdescribe('Given I open ghost page Tags', () => {
             text = await page.click('text=\'Public tags\'');
             text = await page.click('.gh-tag-list-name:has-text(\''+nameTag+'\')');
             await tagsPage.delete(nameTag);
-            await page.screenshot({path: './tags-page-delete.png'});
+            await page.screenshot({path: `${config.imagePath}/tags-detail-delete.png`});
             await page.goto(tagsUrlBase);
-            await page.screenshot({path: './tags-page-delete_.png'});       
+            await page.screenshot({path: `${config.imagePath}/tags-page-delete.png`});       
         });
 
         it('The tag "Tags Test" should not be found', async () => {

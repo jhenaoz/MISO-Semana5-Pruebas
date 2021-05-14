@@ -5,24 +5,6 @@
   "url": "https://ghost3-3-0.herokuapp.com/ghost",
   "urlApi":"https://ghost3-3-0.herokuapp.com",
   "key": "6096f662bee550001c0d879b:d93bbe382d07538ea15f32fec8068324047b2f3cac813396ad0ac9faff2bea13",
-  "version": "v3",
-  "tags":{
-           "playwrigth":
-           {
-              "create": 
-              {
-                "emailUser":".gh-user-email",
-                "tagName":"#tag-name",
-                "publicTags":"text=\"Public tags\"",
-                "listTagsName":".gh-tag-list-name",
-                "textSave":"text=Save"
-              },
-              "delete":
-              {
-                 "tagsPlaceHolder":".gh-tags-placeholder",
-                 "listTagsNameItem":".gh-tag-list-name:has-text('%s')"
-              }
-           }
-         
+  "version": "v3"     
   }
 }
