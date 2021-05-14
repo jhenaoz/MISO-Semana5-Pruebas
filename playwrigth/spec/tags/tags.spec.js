@@ -4,15 +4,11 @@ const util = require('util');
 const { Login } = require('../../src/login.page')
 const { Tags } = require('../../src/tags.page')
 const GhostAdminAPI = require('@tryghost/admin-api');
-//const url = `${config.url}`;
-/*const tagsUrl = `${url}/#/tags/new`;
+const url = `${config.url}`;
+const tagsUrl = `${url}/#/tags/new`;
 const tagsUrlBase = `${url}/#/tags`;
-const internalTagUrl = `${url}/#/tags?type=internal`;*/
-const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin';
-const tagsUrl = 'https://ghost3-3-0.herokuapp.com/ghost/#/tags/new';
-const tagsUrlBase = 'https://ghost3-3-0.herokuapp.com/ghost/#/tags';
-const internalTagUrl = 'https://ghost3-3-0.herokuapp.com/ghost/#/tags?type=internal';
-describe('Given I open ghost page Tags', () => {
+const internalTagUrl = `${url}/#/tags?type=internal`;
+fdescribe('Given I open ghost page Tags', () => {
     let browser;
     let context;
     let page;
@@ -21,7 +17,7 @@ describe('Given I open ghost page Tags', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000
 
     beforeEach(async () => {
-        browser = await playwright['chromium'].launch();     
+        browser = await playwright['chromium'].launch({headless: true});     
         context = await browser.newContext({recordVideo: { dir: 'videos/' } });//{ 
         page = await context.newPage();
         loginPage = new Login(page);
@@ -76,7 +72,7 @@ describe('Given I open ghost page Tags', () => {
             text = await page.textContent(config.tags.playwrigth.create.tagName);
             await tagsPage.create(nameTag);
             await page.goto(tagsUrlBase);
-            text = await page.click(config.tags.playwrigth.create.publicTags);
+            text = await page.click('text=\'Public tags\'');
             text = await page.click('.gh-tag-list-name:has-text(\''+nameTag+'\')');
             await tagsPage.delete(nameTag);
             await page.screenshot({path: './tags-page-delete.png'});

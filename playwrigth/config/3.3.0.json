@@ -13,8 +13,9 @@
               {
                 "emailUser":".gh-user-email",
                 "tagName":"#tag-name",
-                "publicTags":"text='Public tags'",
-                "listTagsName":".gh-tag-list-name"
+                "publicTags":"text=\"Public tags\"",
+                "listTagsName":".gh-tag-list-name",
+                "textSave":"text=Save"
               },
               "delete":
               {
