@@ -1,6 +1,7 @@
 {
   "generateBaseline": true,
   "compareBaseline": false,
+  "imagePath":"./images/3.3.0",
   "url": "https://ghost3-3-0.herokuapp.com/ghost",
   "urlApi":"https://ghost3-3-0.herokuapp.com",
   "key": "6096f662bee550001c0d879b:d93bbe382d07538ea15f32fec8068324047b2f3cac813396ad0ac9faff2bea13",
@@ -12,16 +13,13 @@
               {
                 "emailUser":".gh-user-email",
                 "tagName":"#tag-name",
-                "publicTags":"text=Public tags",
-                "listTagsName":".gh-tag-list-name",
-                "textSave":"text=Save"
+                "publicTags":"text='Public tags'",
+                "listTagsName":".gh-tag-list-name"
               },
               "delete":
               {
                  "tagsPlaceHolder":".gh-tags-placeholder",
-                 "listTagsNameItem":".gh-tag-list-name:has-text('%s')",
-                 "button":"button:has-text('Delete tag')",
-                 "modal":".modal-footer > button:has-text('Delete')"
+                 "listTagsNameItem":".gh-tag-list-name:has-text('%s')"
               }
            }
          
