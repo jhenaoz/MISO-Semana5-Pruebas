@@ -12,7 +12,7 @@ const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin';
 const tagsUrl = 'https://ghost3-3-0.herokuapp.com/ghost/#/tags/new';
 const tagsUrlBase = 'https://ghost3-3-0.herokuapp.com/ghost/#/tags';
 const internalTagUrl = 'https://ghost3-3-0.herokuapp.com/ghost/#/tags?type=internal';
-fdescribe('Given I open ghost page Tags', () => {
+describe('Given I open ghost page Tags', () => {
     let browser;
     let context;
     let page;
