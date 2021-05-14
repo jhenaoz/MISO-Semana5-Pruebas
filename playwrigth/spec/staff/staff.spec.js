@@ -14,7 +14,8 @@ fdescribe('Given I open ghost page', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000
 
     beforeEach(async () => {
-        browser = await playwright['chromium'].launch();
+        browser = await playwright['chromium'].launch({headless: true, viewport: {width:config.resemble.viewportWidth, height:config.resemble.viewportHeight}});
+
         context = await browser.newContext({ recordVideo: { dir: 'videos/' } });
         page = await context.newPage();
         loginPage = new Login(page);
