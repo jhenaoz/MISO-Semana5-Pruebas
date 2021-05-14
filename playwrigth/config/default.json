@@ -9,6 +9,7 @@
     "password": "Test4echo!"
   },
   "resemble": {
+    "browsers":["chrome"],
     "options": {
       "output": {
         "errorColor": {
