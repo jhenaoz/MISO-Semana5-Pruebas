@@ -6,7 +6,7 @@ const url = `${config.url}/#/signin`;
 const urlStaff = `${config.url}/#/staff`;
 const url3 = `${config.url}/#/staff/admin`;
 
-describe('Given I open ghost page', () => {
+fdescribe('Given I open ghost page', () => {
     let browser;
     let context;
     let page;
@@ -45,13 +45,11 @@ describe('Given I open ghost page', () => {
     describe('When Invite people with email in use', () => {
         beforeEach(async () => {
             await loginPage.login(config.editorUser.email, config.editorUser.password);
-            // await page.screenshot({path: './pagina.png'})
             await page.goto(urlStaff);
             await staffPage.send('pruebas@pruebas.com');
             await page.goto(urlStaff);
             await staffPage.send('pruebas@pruebas.com');
-            await page.screenshot({ path: `${config.imagePath}/pagina-use.png `});
-
+            // await page.screenshot({ path: `${config.imagePath}/pagina-use.png `});
         });
 
         it('Then I see "A user with that email address was already invited." in page', async () => {

@@ -6,7 +6,8 @@ const GhostAdminAPI = require('@tryghost/admin-api');
 const url = `${config.url}`;
 const tagsUrl = `${url}/#/tags/new`;
 const tagsUrlBase = `${url}/#/tags`;
-fdescribe('Given I open ghost page Tags', () => {
+const internalTagUrl = `${url}/#/tags?type=internal`;
+describe('Given I open ghost page Tags', () => {
     let browser;
     let context;
     let page;

@@ -25,11 +25,13 @@ describe('Given I open ghost page', () => {
     describe('When i login as an admin user', () => {
         beforeEach(async () => {
             await loginPage.login(config.adminUser.email, config.adminUser.password);
+            await page.screenshot({ path: `${config.imagePath}/pagina-login.png` });
+
         });
 
         it('Then I see "admin-user@mailsac.com" in the home page', async () => {
             const text = await page.textContent('.gh-user-email');
-
+            await page.screenshot({ path: `${config.imagePath}/pagina-dashboard.png` });
             expect(text).toBe(config.adminUser.email);
         });
 

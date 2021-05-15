@@ -68,5 +68,4 @@ images.forEach(async (image) => {
         </html>`
     }
     writeFileSync(`./results/report.html`, createReport(datetime, comparisonResult));
-    copyFileSync('./scripts/index.css', `./results/index.css`);
 });
