@@ -50,7 +50,7 @@ describe('Given I open ghost page', () => {
             await staffPage.send('pruebas@pruebas.com');
             await page.goto(urlStaff);
             await staffPage.send('pruebas@pruebas.com');
-            await page.screenshot({ path: './pagina-use.png' });
+            await page.screenshot({ path: `${config.imagePath}/pagina-use.png `});
 
         });
 
@@ -70,7 +70,7 @@ describe('Given I open ghost page', () => {
             // await page.screenshot({path: './pagina.png'})
             await page.goto(url3);
             await staffPage.changePassword('Fakepassword1234','F@kenewp@ssw0rd.1234');
-            await page.screenshot({ path: './error-pass.png' });
+            await page.screenshot({ path: `${config.imagePath}/error-pass.png` });
 
         });
 
@@ -89,7 +89,7 @@ describe('Given I open ghost page', () => {
             // await page.screenshot({path: './pagina.png'})
             await page.goto(url3);
             await staffPage.changeBio('Test BIO2');
-            await page.screenshot({ path: './error-pass.png' });
+            await page.screenshot({ path: `${config.imagePath}/bio.png` });
 
         });
 
@@ -108,7 +108,7 @@ describe('Given I open ghost page', () => {
             // await page.screenshot({path: './pagina.png'})
             await page.goto(urlStaff);
             await staffPage.send('pruebas@pruebas.com');
-            await page.screenshot({ path: './pagina-send.png' });
+            await page.screenshot({ path: `${config.imagePath}/unset-email.png` });
 
         });
 
