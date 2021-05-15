@@ -6,8 +6,7 @@ const GhostAdminAPI = require('@tryghost/admin-api');
 const url = `${config.url}`;
 const tagsUrl = `${url}/#/tags/new`;
 const tagsUrlBase = `${url}/#/tags`;
-const internalTagUrl = `${url}/#/tags?type=internal`;
-fdescribe('Given I open ghost page Tags', () => {
+describe('Given I open ghost page Tags', () => {
     let browser;
     let context;
     let page;
@@ -63,7 +62,7 @@ fdescribe('Given I open ghost page Tags', () => {
         });
     });
 
-    describe('I delete an internal tag a "Tags Test"', () => {
+    describe('I delete  tag a "Tags Test"', () => {
         let nameTag = 'Tags Test';
         beforeEach(async () => {
             await loginPage.login(config.adminUser.email, config.adminUser.password);
@@ -81,6 +80,51 @@ fdescribe('Given I open ghost page Tags', () => {
         });
 
         it('The tag "Tags Test" should not be found', async () => {
+            await page.goto(tagsUrlBase);
+            const text = await page.textContent('.gh-tags-placeholder');
+            expect(text).not.toContain(nameTag);
+        });
+    });
+
+
+    describe('I create a internal tags with title "Tags Test" and body "Cuerpo texto"', () => {
+        let nameTag = '#Tags Test';
+        beforeEach(async () => {
+            await loginPage.login(config.adminUser.email, config.adminUser.password);
+            let text = await page.textContent('.gh-user-email');
+            await page.goto(tagsUrl);
+            await page.screenshot({path: `${config.imagePath}/tags-page.png`});
+            text = await page.textContent('#tag-name');
+            await tagsPage.create(nameTag);
+            await page.goto(tagsUrlBase);
+            text = await page.click('text=\'Internal tags\'');
+            await page.screenshot({path:`${config.imagePath}/tags-page-create.png`});
+        });
+
+        it('Then The tags "Internal Tags Test" should be created', async () => {
+            const text_ = await page.textContent('.gh-tag-list-name');
+            expect(text_).toContain(nameTag);
+        });
+    });
+
+    describe('I delete an internal tag a "Tags Test"', () => {
+        let nameTag = '#Tags Test';
+        beforeEach(async () => {
+            await loginPage.login(config.adminUser.email, config.adminUser.password);
+            let text = await page.textContent('.gh-user-email');
+            await page.goto(tagsUrl);
+            text = await page.textContent('#tag-name');
+            await tagsPage.create(nameTag);
+            await page.goto(tagsUrlBase);
+            text = await page.click('text=\'Internal tags\'');
+            text = await page.click('.gh-tag-list-name:has-text(\''+nameTag+'\')');
+            await tagsPage.delete(nameTag);
+            await page.screenshot({path: `${config.imagePath}/tags-detail-delete.png`});
+            await page.goto(tagsUrlBase);
+            await page.screenshot({path: `${config.imagePath}/tags-page-delete.png`});       
+        });
+
+        it('The tag "Internal Tags Test" should not be found', async () => {
             await page.goto(tagsUrlBase);
             const text = await page.textContent('.gh-tags-placeholder');
             expect(text).not.toContain(nameTag);
