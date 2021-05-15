@@ -1,15 +1,13 @@
 const playwright = require('playwright');
 const config = require('config');
-const util = require('util');
 const { Login } = require('../../src/login.page')
 const { Tags } = require('../../src/tags.page')
 const GhostAdminAPI = require('@tryghost/admin-api');
 const url = `${config.url}`;
-const urlLogin = `${url}/#/signin`;
 const tagsUrl = `${url}/#/tags/new`;
 const tagsUrlBase = `${url}/#/tags`;
 const internalTagUrl = `${url}/#/tags?type=internal`;
-describe('Given I open ghost page Tags', () => {
+fdescribe('Given I open ghost page Tags', () => {
     let browser;
     let context;
     let page;
@@ -44,22 +42,23 @@ describe('Given I open ghost page Tags', () => {
           })
         .catch(error => console.error(error))
     });
+   
     describe('I create a tags with title "Tags Test" and body "Cuerpo texto"', () => {
         let nameTag = 'Tags Test';
         beforeEach(async () => {
             await loginPage.login(config.adminUser.email, config.adminUser.password);
-            let text = await page.textContent(config.tags.playwrigth.create.emailUser);
+            let text = await page.textContent('.gh-user-email');
             await page.goto(tagsUrl);
-            await page.screenshot({path: './tags-page.png'});
-            text = await page.textContent(config.tags.playwrigth.create.tagName);
+            await page.screenshot({path: `${config.imagePath}/tags-page.png`});
+            text = await page.textContent('#tag-name');
             await tagsPage.create(nameTag);
             await page.goto(tagsUrlBase);
-            text = await page.click(config.tags.playwrigth.create.publicTags);
-            await page.screenshot({path: './tags-page-create.png'});
+            text = await page.click('text=\'Public tags\'');
+            await page.screenshot({path:`${config.imagePath}/tags-page-create.png`});
         });
 
         it('Then The tags "Tags Test" should be created', async () => {
-            const text_ = await page.textContent(config.tags.playwrigth.create.listTagsName);
+            const text_ = await page.textContent('.gh-tag-list-name');
             expect(text_).toContain(nameTag);
         });
     });
@@ -68,42 +67,33 @@ describe('Given I open ghost page Tags', () => {
         let nameTag = 'Tags Test';
         beforeEach(async () => {
             await loginPage.login(config.adminUser.email, config.adminUser.password);
-            let text = await page.textContent(config.tags.playwrigth.create.emailUser);
+            let text = await page.textContent('.gh-user-email');
             await page.goto(tagsUrl);
-            text = await page.textContent(config.tags.playwrigth.create.tagName);
+            text = await page.textContent('#tag-name');
             await tagsPage.create(nameTag);
             await page.goto(tagsUrlBase);
-            text = await page.click(config.tags.playwrigth.create.tagName);
-            text = await page.click(util.format(config.tags.playwrigth.delete.listTagsNameItem,nameTag));
+            text = await page.click('text=\'Public tags\'');
+            text = await page.click('.gh-tag-list-name:has-text(\''+nameTag+'\')');
             await tagsPage.delete(nameTag);
-            await page.screenshot({path: './tags-page-delete.png'});
+            await page.screenshot({path: `${config.imagePath}/tags-detail-delete.png`});
             await page.goto(tagsUrlBase);
-            await page.screenshot({path: './tags-page-delete_.png'});       
+            await page.screenshot({path: `${config.imagePath}/tags-page-delete.png`});       
         });
 
         it('The tag "Tags Test" should not be found', async () => {
             await page.goto(tagsUrlBase);
-            const text = await page.textContent(config.tags.playwrigth.delete.tagsPlaceHolder);
+            const text = await page.textContent('.gh-tags-placeholder');
             expect(text).not.toContain(nameTag);
         });
     });
+
+    
 
     afterEach(async () => {
         console.log('Browser Context Closed!')
         await context.close();
     });
 });
-
-
-
-
-
-
-
-
-
-
-
 
 
 

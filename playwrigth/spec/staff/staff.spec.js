@@ -6,7 +6,7 @@ const url = `${config.url}/#/signin`;
 const urlStaff = `${config.url}/#/staff`;
 const url3 = `${config.url}/#/staff/admin`;
 
-fdescribe('Given I open ghost page', () => {
+describe('Given I open ghost page', () => {
     let browser;
     let context;
     let page;
@@ -23,7 +23,7 @@ fdescribe('Given I open ghost page', () => {
         await page.goto(url);
     });
 
-    fdescribe('When I invite people with "pruebas@pruebas.com" and role "Administrator"', () => {
+    describe('When I invite people with "pruebas@pruebas.com" and role "Administrator"', () => {
         beforeEach(async () => {
             await loginPage.login(config.editorUser.email, config.editorUser.password);
             await page.goto(urlStaff);
