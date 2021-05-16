@@ -27,7 +27,8 @@ Cypress:
 ```shell
   cd cypress
   npm i
-  npx cypress open
+  npx cypress open --config-file cypress3.3.0.json
+  npx cypress open --config-file cypress3.42.5.json
 ```
 Ejecutar las pruebas:
 ![image](https://user-images.githubusercontent.com/2055110/117755826-96766980-b1e2-11eb-9094-f1c71a17ad5e.png)
