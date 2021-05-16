@@ -8,6 +8,21 @@ IMPORTANTE: LA APLICACION DE GHOST LA DESPLEGAMOS EN HEROKU, ENTONCES A LA HORA 
 
 GRACIAS POR SU COMPRENSION 😁
 
+Tambien pueden acceder a estas urls para estar seguros que heroku tiene la aplicacion arribar
+https://ghost3-42-5.herokuapp.com/ghost/
+https://ghost3-3-0.herokuapp.com/ghost/
+
+# Visual Tests
+```shell
+  cd playwright
+  npm run visualtestresemble
+
+  # For backstop Tests
+  npm run images-server
+  npm run visualtestbackstop
+```
+
+
 Cypress:
 ```shell
   cd cypress
