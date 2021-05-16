@@ -6,7 +6,7 @@ const url = `${config.url}/#/signin`;
 const urlStaff = `${config.url}/#/staff`;
 const url3 = `${config.url}/#/staff/admin`;
 
-fdescribe('Given I open ghost page', () => {
+describe('Given I open ghost page', () => {
     let browser;
     let context;
     let page;

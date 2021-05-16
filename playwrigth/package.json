@@ -8,6 +8,7 @@
     "test3.42.5": "NODE_ENV=3.42.5 jasmine || exit 0",
     "test3.3.0": "NODE_ENV=3.3.0 jasmine || exit 0",
     "visualtestresemble": "npm run test3.42.5 && npm run test3.3.0 && npm run resemble",
+    "generateBaseline": "NODE_ENV=3.3.0 backstop test",
     "images-server": "tiny-server ./images",
     "resemble": "node scripts/resemble.js"
   },

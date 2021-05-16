@@ -44,7 +44,7 @@ module.exports = {
       {
         "label": "Login Page",
         "cookiePath": "backstop_data/engine_scripts/cookies.json",
-        "url": `http://localhost:3000/${process.env.NODE_ENV}/error-pass.png`,
+        "url": `http://localhost:3000/3.3.0/error-pass.png`,
         "referenceUrl": "",
         "readyEvent": "",
         "readySelector": "",
