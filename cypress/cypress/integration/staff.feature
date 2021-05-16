@@ -13,7 +13,7 @@ Feature: Ghost staff Page
         Given I open ghost staff page to invite people with email in use
         When I login with "admin-user@mailsac.com" and password "Test4echo!"
         When I go to the staff page
-        When I invite people with "pruebas@pruebas.com" and role "Administrator"
+        When I invite people with email in use "pruebas@pruebas.com" and role "Administrator"
         Then I see "A user with that email address was already invited." in the page
 
 
