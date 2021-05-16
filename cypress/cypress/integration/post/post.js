@@ -1,8 +1,8 @@
 import { Given, Then, When, After } from "cypress-cucumber-preprocessor/steps";
 
-const url1 = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
-const urlPost = 'https://ghost3-3-0.herokuapp.com/ghost/#/posts';
-const urlDraft= 'https://ghost3-3-0.herokuapp.com/ghost/#/posts?type=draft';
+const url1 = '/#/signin'
+const urlPost = '/#/posts';
+const urlDraft= '/#/posts?type=draft';
 
 Given('I open ghost page', () => {
     cy.visit(url1)
@@ -18,6 +18,8 @@ When(`I create a post with title {string} and body {string}`, (title, body) => {
     cy.get('[href="#/editor/post/"]').click({force: true});
     cy.get('.gh-editor-title').click({force: true}).type(title);
     cy.get('.koenig-editor__editor').click({force: true}).type(body);
+
+    cy.screenshot('post-created-page');
 })
 
 Then('The post {string} should be created', (postTitle) => {
@@ -31,6 +33,8 @@ When('I change title with old text {string} for new text {string}', (oldTitle, n
     cy.get('.gh-post-list-title').contains(oldTitle).click({force: true});
     cy.get('.gh-editor-title').click({force: true}).clear();
     cy.get('.gh-editor-title').click({force: true}).type(newTitle);
+
+    cy.screenshot('post-updated-page');
 })
 
 Then('The post {string} should be updated', (postTitle) => {
@@ -43,8 +47,9 @@ When('I published a specific post with title {string}', (postTitle) => {
     cy.get('[href="#/posts/"]:nth(1)').click({force: true});
     cy.get('.gh-post-list-title').contains(postTitle).click({force: true});
     cy.get('.view-actions').contains('Publish').click();
-    // cy.get('.gh-publishmenu-dropdown > .gh-publishmenu-radio').contains('Set it live now').click();
     cy.get('button > span').contains('Publish').click();
+
+    cy.screenshot('post-publish-page');
 })
 
 Then('The post {string} should be published', (postTitle) => {
@@ -64,6 +69,7 @@ When('I delete a {string}', (postTitle) => {
 
 Then('The post {string} should not be found', () => {
     cy.get('h3').contains("You haven't written any posts yet!")
+    cy.screenshot('post-delete-page');
 });
 
 When('I published a draft post with title {string}', (postTitle) => {
@@ -71,6 +77,8 @@ When('I published a draft post with title {string}', (postTitle) => {
     cy.get('.gh-post-list-title').contains(postTitle).click({force: true});
     cy.get('.view-actions').contains('Publish').click();
     cy.get('button > span').contains('Publish').click();
+
+    cy.screenshot('post-updated-draft-page');
 });
 
 After(() => {
