@@ -1,9 +1,11 @@
 {
+  "baseUrl": "https://ghost3-3-0.herokuapp.com/ghost",
   "chromeWebSecurity": false,
   "testFiles": "**/*.{feature,features}",
   "projectId": "tgpzqx",
   "retries": {
     "runMode": 2,
     "openMode": 2
-  }
+  },
+  "screenshotsFolder": "cypress/screenshots/3.3.0"
 }

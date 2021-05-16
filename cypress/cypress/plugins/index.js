@@ -17,7 +17,13 @@
  */
 // eslint-disable-next-line no-unused-vars
 const cucumber = require('cypress-cucumber-preprocessor').default
+const { renameSync } = require('fs');
 
 module.exports = (on, config) => {
   on('file:preprocessor', cucumber())
+  
+  on('after:screenshot', ({ path }) => {
+    renameSync(path, path.replace(/ \(\d*\)/i, ''));
+  });
+  return config;
 }
