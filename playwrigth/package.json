@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine",
+    "test3.42.5": "NODE_ENV=3.42.5 jasmine || exit 0",
+    "test3.3.0": "NODE_ENV=3.3.0 jasmine || exit 0",
+    "visualtestresemble": "npm run test3.42.5 && npm run test3.3.0 && npm run resemble",
+    "visualtestbackstop": "backstop test --config backstop3.42.5.json",
+    "generateBaseline": "NODE_ENV=3.3.0 backstop test",
+    "images-server": "tiny-server ./images",
+    "resemble": "node scripts/resemble.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,7 +20,12 @@
   },
   "dependencies": {
     "@tryghost/admin-api": "^1.4.2",
+    "backstopjs": "^5.3.2",
+    "config": "^3.3.6",
     "jasmine": "^3.7.0",
-    "jasmine-spec-reporter": "^7.0.0"
+    "jasmine-spec-reporter": "^7.0.0",
+    "resemblejs": "^3.2.5",
+    "tiny-server": "^1.1.0",
+    "util": "^0.12.3"
   }
 }

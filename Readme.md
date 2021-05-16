@@ -4,12 +4,31 @@
 - Zully Alarcon: z.alarcon@uniandes.edu.co
 - Juan David Henao: j.henaoz@uniandes.edu.co 
 ## Como ejecutar el proyecto
+IMPORTANTE: LA APLICACION DE GHOST LA DESPLEGAMOS EN HEROKU, ENTONCES A LA HORA DE EJECUTAR LAS PRUEBAS LA PRIMERA ITERACION SIEMPRE FALLA MIENTRAS LA APLICACION INICIA, YA QUE HEROKU SIEMPRE APAGA LOS SERVIDORES PARA LA CAPA GRATUITA
+
+GRACIAS POR SU COMPRENSION 😁
+
+Tambien pueden acceder a estas urls para estar seguros que heroku tiene la aplicacion arribar
+https://ghost3-42-5.herokuapp.com/ghost/
+https://ghost3-3-0.herokuapp.com/ghost/
+
+# Visual Tests
+```shell
+  cd playwright
+  npm run visualtestresemble
+
+  # For backstop Tests
+  npm run images-server
+  npm run visualtestbackstop
+```
+
 
 Cypress:
 ```shell
   cd cypress
   npm i
-  npx cypress open
+  npx cypress open --config-file cypress3.3.0.json
+  npx cypress open --config-file cypress3.42.5.json
 ```
 Ejecutar las pruebas:
 ![image](https://user-images.githubusercontent.com/2055110/117755826-96766980-b1e2-11eb-9094-f1c71a17ad5e.png)

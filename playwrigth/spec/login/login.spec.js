@@ -1,6 +1,7 @@
 const playwright = require('playwright');
 const { Login } = require('../../src/login.page')
-const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
+const config = require('config');
+const url = `${config.url}/#/signin`;
 
 describe('Given I open ghost page', () => {
     let browser;
@@ -23,32 +24,34 @@ describe('Given I open ghost page', () => {
 
     describe('When i login as an admin user', () => {
         beforeEach(async () => {
-            await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
+            await loginPage.login(config.adminUser.email, config.adminUser.password);
+            await page.screenshot({ path: `${config.imagePath}/pagina-login.png` });
+
         });
 
         it('Then I see "admin-user@mailsac.com" in the home page', async () => {
             const text = await page.textContent('.gh-user-email');
-
-            expect(text).toBe('admin-user@mailsac.com');
+            await page.screenshot({ path: `${config.imagePath}/pagina-dashboard.png` });
+            expect(text).toBe(config.adminUser.email);
         });
 
         it('Then I see admin section in the home page', async () => {
             const text = await page.textContent('.gh-user-email');
             const settingsSection = await page.textContent('.gh-nav-settings>.gh-nav-list-h');
             expect(settingsSection).toBe('Settings');
-            expect(text).toBe('admin-user@mailsac.com');
+            expect(text).toBe(config.adminUser.email);
         });
     });
 
     describe('When i login as an editor user', () => {
         beforeEach(async () => {
-            await loginPage.login('staff-user@mailsac.com', 'Test4echo!');
+            await loginPage.login(config.editorUser.email, config.editorUser.password);
         });
 
         it('Then I see "staff-user@mailsac.com" in the home page', async () => {
             const text = await page.textContent('.gh-user-email');
             
-            expect(text).toBe('staff-user@mailsac.com');
+            expect(text).toBe(config.editorUser.email);
         });
     });
 });

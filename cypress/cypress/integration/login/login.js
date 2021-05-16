@@ -1,12 +1,13 @@
 import { Given, Then, When } from "cypress-cucumber-preprocessor/steps";
 
-const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
+const url = '/#/signin'
 Given('I open ghost page', () => {
   cy.visit(url)
 })
 
 When(`I login with {string} and password {string}`, (username, password) => {
-  cy.login(username,password)
+  cy.login(username,password);
+  cy.screenshot('Login Page');
 })
 
 Then(`I see {string} in the page`, (error) => {

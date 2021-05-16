@@ -4,9 +4,10 @@ const GhostAdminAPI = require('@tryghost/admin-api');
 const { Login } = require('../../src/login.page')
 const { Post } = require('../../src/post.page')
 
-const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
-const urlPost = 'https://ghost3-3-0.herokuapp.com/ghost/#/posts';
-const urlEPost = 'https://ghost3-3-0.herokuapp.com/ghost/#/editor/post/';
+const config = require('config');
+const url = `${config.url}/#/signin`;
+const urlPost = `${config.url}/#/posts`;
+const urlEPost = `${config.url}/#/editor/post/`;
 
 describe('Given I open ghost page', () => {
     let browser;
@@ -27,11 +28,10 @@ describe('Given I open ghost page', () => {
 
     describe('When I create a post with title "Post Test" and body "Cuerpo texto"', () => {
         beforeEach(async () => {
-            await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
-            await page.screenshot({path: './post-page.png'});
+            await loginPage.login(config.adminUser.email, config.adminUser.password);
             await page.goto(urlEPost);
             await postPage.post('Post Test', 'Cuerpo texto');
-            await page.screenshot({path: './post-page-create.png'});
+            await page.screenshot({path: `${config.imagePath}/post-page-create.png`});
         });
 
         it('Then The post "Post Test" should be created', async () => {
@@ -43,14 +43,14 @@ describe('Given I open ghost page', () => {
 
     describe('When I change title with old text "Post Test 1" for new text "Post Test 2"', () => {
         beforeEach(async () => {
-            await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
+            await loginPage.login(config.adminUser.email, config.adminUser.password);
             await page.goto(urlEPost);
             await postPage.post('Post Test 1', 'Cuerpo texto 1');
 
             await page.goto(urlPost);
             await postPage.search('Post Test 1');
             await postPage.post('Post Test 2', 'Cuerpo texto 2');
-            await page.screenshot({path: './post-page-update.png'});
+            await page.screenshot({path: `${config.imagePath}/post-page-update.png`});
         });
 
         it('Then the post "Post Test" should be updated', async () => {
@@ -62,13 +62,13 @@ describe('Given I open ghost page', () => {
 
     describe('When I published a specific post with title "Post Test 3"', () => {
         beforeEach(async () => {
-            await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
+            await loginPage.login(config.adminUser.email, config.adminUser.password);
             await page.goto(urlEPost);
             await postPage.post('Post Test 3', 'Cuerpo texto 3');
 
             await page.goto(urlPost);
             await postPage.publish('Post Test 3');
-            await page.screenshot({path: './post-page-publish.png'});
+            await page.screenshot({path: `${config.imagePath}/post-page-publish.png`});
         });
 
         it('Then the post "Post Test 3" should be "Published"', async () => {
@@ -80,13 +80,13 @@ describe('Given I open ghost page', () => {
 
     describe('When I delete a "Post Test 4"', () => {
         beforeEach(async () => {
-            await loginPage.login('admin-user@mailsac.com', 'Test4echo!');
+            await loginPage.login(config.adminUser.email, config.adminUser.password);
             await page.goto(urlEPost);
             await postPage.post('Post Test 4', 'Se va a borrar');
 
             await page.goto(urlPost);
             await postPage.remove('Post Test 4');
-            await page.screenshot({path: './post-page-delete.png'});
+            await page.screenshot({path: `${config.imagePath}/post-page-delete.png`});
         });
 
         it('Then the post "Post Test 4" should not be found', async () => {
@@ -99,10 +99,9 @@ describe('Given I open ghost page', () => {
     afterEach(async () => {
         await context.close();
         const api = new GhostAdminAPI({
-            url: 'https://ghost3-3-0.herokuapp.com',
-            // Admin API key goes here
-            key: '6096f662bee550001c0d879b:d93bbe382d07538ea15f32fec8068324047b2f3cac813396ad0ac9faff2bea13',
-            version: 'v3'
+            url: `${config.urlApi}`,
+            key: `${config.key}`,
+            version: `${config.version}`
         });
         
         api.posts.browse({limit: 10})
