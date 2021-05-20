@@ -1,13 +1,16 @@
+const sycnRequest = require('sync-request');
 class Mockaroo {
-    constructor(page) {
-        this.page = page;
-      }
+    constructor() {
 
-    async Mockaroo(username, password) {
-        await this.page.fill('#ember8', username);
-        await this.page.fill('#ember10', password);
-        await this.page.click('#ember12');
-        return true;
+    }
+
+    static getDataPost() {
+        const reponse = sycnRequest('GET', 'https://my.api.mockaroo.com/test_schema.json?key=e4c63dd0')
+        let rta = reponse.getBody('utf8').split("\n");
+        rta.shift()
+        rta.pop()
+        return rta;
+
     }
 }
 

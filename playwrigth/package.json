@@ -25,6 +25,7 @@
     "jasmine": "^3.7.0",
     "jasmine-spec-reporter": "^7.0.0",
     "resemblejs": "^3.2.5",
+    "sync-request": "^6.1.0",
     "tiny-server": "^1.1.0",
     "util": "^0.12.3"
   }
