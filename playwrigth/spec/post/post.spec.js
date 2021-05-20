@@ -16,8 +16,7 @@ fdescribe('Given I open ghost page', () => {
     let page;
     let loginPage;
     let postPage;
-    let mockaroo
-    let postTitles = Mockaroo.getDataPost();
+    let postTitles = Mockaroo.getData('https://my.api.mockaroo.com/test_schema.json?key=e4c63dd0');
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000
 
     beforeEach(async () => {
@@ -51,8 +50,6 @@ fdescribe('Given I open ghost page', () => {
             });
         });
     });
-
-
 
     describe('When I change title with old text "Post Test 1" for new text "Post Test 2"', () => {
         beforeEach(async () => {

@@ -3,6 +3,7 @@ const { Login } = require('../../src/login.page')
 const { Dashboard } = require('../../src/dashboard.page')
 const GhostAdminAPI = require('@tryghost/admin-api');
 const { Page } = require('../../src/page.page')
+const { Mockaroo } = require('../../src/mockaroo/mockaroo')
 const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
 
 describe('Given I open ghost page', () => {

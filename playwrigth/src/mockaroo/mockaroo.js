@@ -1,16 +1,13 @@
 const sycnRequest = require('sync-request');
 class Mockaroo {
-    constructor() {
+    constructor() { }
 
-    }
-
-    static getDataPost() {
-        const reponse = sycnRequest('GET', 'https://my.api.mockaroo.com/test_schema.json?key=e4c63dd0')
+    static getData(url) {
+        const reponse = sycnRequest('GET', `${url}`)
         let rta = reponse.getBody('utf8').split("\n");
         rta.shift()
         rta.pop()
         return rta;
-
     }
 }
 
