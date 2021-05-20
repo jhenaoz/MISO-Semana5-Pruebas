@@ -80,6 +80,7 @@ fdescribe('Given I open ghost page', () => {
                     await dashboardPage.navigateToPages();
                     await pagePageObject.createPage(title, body);
                     await pagePageObject.updatePage(title, title2, body);
+                    await page.screenshot({ path: `${config.imagePath}/page-update.png` });
                 });
 
                 it(`The page "${title}" should be updated`, async ()=> {
