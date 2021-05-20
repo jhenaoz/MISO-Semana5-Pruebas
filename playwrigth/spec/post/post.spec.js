@@ -10,14 +10,13 @@ const url = `${config.url}/#/signin`;
 const urlPost = `${config.url}/#/posts`;
 const urlEPost = `${config.url}/#/editor/post/`;
 
-fdescribe('Given I open ghost page', () => {
+describe('Given I open ghost page', () => {
     let browser;
     let context;
     let page;
     let loginPage;
     let postPage;
-    let mockaroo
-    let postTitles = Mockaroo.getDataPost();
+    let postTitles = Mockaroo.getData('https://my.api.mockaroo.com/test_schema.json?key=e4c63dd0');
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000
 
     beforeEach(async () => {
@@ -30,12 +29,13 @@ fdescribe('Given I open ghost page', () => {
 
         await page.goto(url);
     });
-    fdescribe('test mock', () => {
-        console.log(postTitles);
+
+    describe('test mock', () => {
+        // console.log(postTitles);
         postTitles.forEach(postInfo => {
             let title = postInfo.split(",")[0]
             let body = postInfo.split(",")[1]
-            fdescribe(`When I create a post with title ${title} and body ${body}`, () => {
+            describe(`When I create a post with title ${title} and body ${body}`, () => {
                 beforeEach(async () => {
                     await loginPage.login(config.adminUser.email, config.adminUser.password);
                     await page.goto(urlEPost);
@@ -51,8 +51,6 @@ fdescribe('Given I open ghost page', () => {
             });
         });
     });
-
-
 
     describe('When I change title with old text "Post Test 1" for new text "Post Test 2"', () => {
         beforeEach(async () => {

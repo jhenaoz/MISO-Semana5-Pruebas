@@ -14,7 +14,7 @@ describe('Given I open ghost page Tags', () => {
     let page;
     let loginPage;
     let tagsPage;
-    let tagsInfo = Mockaroo.getDataTag();
+    let tagsInfo = Mockaroo.getData('https://my.api.mockaroo.com/tags.json?key=afe00610');
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000
 
     beforeEach(async () => {
