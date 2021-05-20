@@ -10,7 +10,7 @@ const url = `${config.url}/#/signin`;
 const urlPost = `${config.url}/#/posts`;
 const urlEPost = `${config.url}/#/editor/post/`;
 
-fdescribe('Given I open ghost page', () => {
+describe('Given I open ghost page', () => {
     let browser;
     let context;
     let page;
@@ -29,12 +29,13 @@ fdescribe('Given I open ghost page', () => {
 
         await page.goto(url);
     });
-    fdescribe('test mock', () => {
-        console.log(postTitles);
+
+    describe('test mock', () => {
+        // console.log(postTitles);
         postTitles.forEach(postInfo => {
             let title = postInfo.split(",")[0]
             let body = postInfo.split(",")[1]
-            fdescribe(`When I create a post with title ${title} and body ${body}`, () => {
+            describe(`When I create a post with title ${title} and body ${body}`, () => {
                 beforeEach(async () => {
                     await loginPage.login(config.adminUser.email, config.adminUser.password);
                     await page.goto(urlEPost);
