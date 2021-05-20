@@ -112,5 +112,6 @@ describe('Given I open ghost page', () => {
             })
           })
         .catch(error => console.error(error))
+
     });
 });
