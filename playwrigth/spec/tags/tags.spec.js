@@ -3,7 +3,8 @@ const config = require('config');
 const { Login } = require('../../src/login.page')
 const { Tags } = require('../../src/tags.page')
 const GhostAdminAPI = require('@tryghost/admin-api');
-const { Mockaroo } = require('../../src/mockaroo/mockaroo')
+const { Mockaroo } = require('../../src/mockaroo/mockaroo');
+const faker = require('faker');
 const url = `${config.url}`;
 const tagsUrl = `${url}/#/tags/new`;
 const tagsUrlBase = `${url}/#/tags`;
@@ -43,6 +44,31 @@ describe('Given I open ghost page Tags', () => {
             })
           })
         .catch(error => console.error(error))
+    });
+
+
+    describe('I create a tags faker', () => {
+        for (let i = 0; i<6;i++) {
+            let nameTag = faker.name.title();
+            describe(`When I create a tags with name ${nameTag}`, () => {
+                beforeEach(async () => {
+                    await loginPage.login(config.adminUser.email, config.adminUser.password);
+                    let text = await page.textContent('.gh-user-email');
+                    await page.goto(tagsUrl);
+                    await page.screenshot({path: `${config.imagePath}/tags-page.png`});
+                    text = await page.textContent('#tag-name');
+                    await tagsPage.create(nameTag);
+                    await page.goto(tagsUrlBase);
+                    text = await page.click('text=\'Public tags\'');
+                    await page.screenshot({path:`${config.imagePath}/tags-page-create.png`});
+                });
+        
+                it('Then The tags "'+nameTag+'" should be created', async () => {
+                    const text_ = await page.textContent('.gh-tag-list-name');
+                    expect(text_).toContain(nameTag);
+                });
+            });
+        }    
     });
    
 

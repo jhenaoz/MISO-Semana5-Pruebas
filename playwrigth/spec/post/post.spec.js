@@ -4,7 +4,7 @@ const GhostAdminAPI = require('@tryghost/admin-api');
 const { Login } = require('../../src/login.page')
 const { Post } = require('../../src/post.page')
 const { Mockaroo } = require('../../src/mockaroo/mockaroo')
-
+const faker = require('faker');
 const config = require('config');
 const url = `${config.url}/#/signin`;
 const urlPost = `${config.url}/#/posts`;
@@ -51,6 +51,35 @@ describe('Given I open ghost page', () => {
             });
         });
     });
+    
+    describe('When I change title with old text info from faker', () => {
+        for (let i = 0; i<6;i++) {
+            let name = faker.name.title();
+            let body = faker.name.title();
+            let name2 = faker.name.title();
+            let body2 = faker.name.title();
+            describe('When I change title with old text "'+name+'" for new text "'+name2+'" ', () => {
+        
+                beforeEach(async () => {
+                    await loginPage.login(config.adminUser.email, config.adminUser.password);
+                    await page.goto(urlEPost);
+                    await postPage.post(name, body);
+        
+                    await page.goto(urlPost);
+                    await postPage.search(name);
+                    await postPage.post(name2, body2);
+                    await page.screenshot({ path: `${config.imagePath}/post-page-update.png` });
+                });
+        
+                it('Then the post "Post Test" should be updated', async () => {
+                    await page.goto(urlPost);
+                    const text = await page.textContent('.gh-post-list-title');
+                    expect(text).toContain(name2);
+                });
+            });
+        }
+    });   
+    
 
     describe('When I change title with old text "Post Test 1" for new text "Post Test 2"', () => {
         beforeEach(async () => {

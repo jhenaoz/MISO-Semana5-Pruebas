@@ -5,11 +5,11 @@ const { Login } = require('../../src/login.page')
 const { Dashboard } = require('../../src/dashboard.page')
 const { Page } = require('../../src/page.page')
 const { Mockaroo } = require('../../src/mockaroo/mockaroo')
-
+const faker = require('faker');
 const config = require('config');
 const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
 
-fdescribe('Given I open ghost page', () => {
+describe('Given I open ghost page', () => {
     let browser;
     let context;
     let page;
@@ -68,7 +68,30 @@ fdescribe('Given I open ghost page', () => {
         });
     });
 
-    fdescribe('test mock page update', () => {
+
+    fdescribe('test faker page created', () => {
+        for(let i = 0 ; i<6;i++)
+        {
+            let title = faker.name.title();
+            let body = faker.name.title();
+            describe(`When I create a page with title ${title} and body ${body}`, () => {
+                beforeEach(async () => {
+                    await loginPage.login(config.adminUser.email, config.adminUser.password);
+                    await dashboardPage.navigateToPages();
+                    await pagePageObject.createPage(title, body);
+                    await page.screenshot({ path: `${config.imagePath}/page-create.png` });
+                });
+
+                it(`The page ${title} should be created`, async () => {
+                    const textContent = await page.textContent(`h3.gh-content-entry-title:has-text("${title}")`)
+                    expect(title).toBe(textContent.trim());
+                });
+            });
+            
+        }
+    });
+
+    describe('test mock page update', () => {
         pagesMock.forEach(pageInfo => {
             let title = pageInfo.split(",")[0]
             let body = pageInfo.split(",")[1]
