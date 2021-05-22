@@ -4,11 +4,19 @@ const GhostAdminAPI = require('@tryghost/admin-api');
 const { Login } = require('../../src/login.page')
 const { Post } = require('../../src/post.page')
 const { Mockaroo } = require('../../src/mockaroo/mockaroo')
+const { MysqlHelper } = require('../../src/mysql/mysql')
 const faker = require('faker');
 const config = require('config');
 const url = `${config.url}/#/signin`;
 const urlPost = `${config.url}/#/posts`;
 const urlEPost = `${config.url}/#/editor/post/`;
+
+const posts = [
+    {title: 'title1', content: 'content1'},
+    {title: 'title2', content: 'content2'},
+    {title: 'title3', content: 'content3'},
+    {title: 'title4', content: 'content4'},
+];
 
 describe('Given I open ghost page', () => {
     let browser;
@@ -51,9 +59,9 @@ describe('Given I open ghost page', () => {
             });
         });
     });
-    
+
     describe('When I change title with old text info from faker', () => {
-        for (let i = 0; i<6;i++) {
+        for (let i = 0; i<3;i++) {
             let name = faker.name.title();
             let body = faker.name.title();
             let name2 = faker.name.title();
@@ -78,27 +86,30 @@ describe('Given I open ghost page', () => {
                 });
             });
         }
-    });   
-    
-
-    describe('When I change title with old text "Post Test 1" for new text "Post Test 2"', () => {
-        beforeEach(async () => {
-            await loginPage.login(config.adminUser.email, config.adminUser.password);
-            await page.goto(urlEPost);
-            await postPage.post('Post Test 1', 'Cuerpo texto 1');
-
-            await page.goto(urlPost);
-            await postPage.search('Post Test 1');
-            await postPage.post('Post Test 2', 'Cuerpo texto 2');
-            await page.screenshot({ path: `${config.imagePath}/post-page-update.png` });
-        });
-
-        it('Then the post "Post Test" should be updated', async () => {
-            await page.goto(urlPost);
-            const text = await page.textContent('.gh-post-list-title');
-            expect(text).toContain('Post Test 2');
-        });
     });
+
+    describe('Faker Describe', () => {
+        posts.forEach(post => {
+            describe(`When I change title with old text "${post.title}" for new text "Post Test 2"`, () => {
+                beforeEach(async () => {
+                    await loginPage.login(config.adminUser.email, config.adminUser.password);
+                    await page.goto(urlEPost);
+                    await postPage.post(post.title, post.content);
+                    await page.click('a:text("Posts")');
+                    await postPage.search(post.title);
+                    await postPage.post('Post Test 2', 'Cuerpo texto 2');
+                    await page.screenshot({ path: `${config.imagePath}/post-page-update.png` });
+                });
+        
+                it(`Then the post "${post.title}" should be updated`, async () => {
+                    await page.goto(urlPost);
+                    const text = await page.textContent('.gh-post-list-title');
+                    expect(text).toContain('Post Test 2');
+                });
+            });
+        })
+    });
+
 
     describe('When I published a specific post with title "Post Test 3"', () => {
         beforeEach(async () => {
@@ -152,6 +163,6 @@ describe('Given I open ghost page', () => {
                 })
             })
             .catch(error => console.error(error))
-
+        MysqlHelper.cleanIpCounter();
     });
 });

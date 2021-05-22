@@ -4,6 +4,7 @@ const { Login } = require('../../src/login.page')
 const { Tags } = require('../../src/tags.page')
 const GhostAdminAPI = require('@tryghost/admin-api');
 const { Mockaroo } = require('../../src/mockaroo/mockaroo');
+const { MysqlHelper } = require('../../src/mysql/mysql');
 const faker = require('faker');
 const url = `${config.url}`;
 const tagsUrl = `${url}/#/tags/new`;
@@ -44,6 +45,7 @@ describe('Given I open ghost page Tags', () => {
             })
           })
         .catch(error => console.error(error))
+        MysqlHelper.cleanIpCounter();
     });
 
 

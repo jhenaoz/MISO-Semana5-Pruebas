@@ -5,6 +5,7 @@ const { Login } = require('../../src/login.page')
 const { Dashboard } = require('../../src/dashboard.page')
 const { Page } = require('../../src/page.page')
 const { Mockaroo } = require('../../src/mockaroo/mockaroo')
+const { MysqlHelper } = require('../../src/mysql/mysql')
 const faker = require('faker');
 const config = require('config');
 const url = 'https://ghost3-3-0.herokuapp.com/ghost/#/signin'
@@ -46,6 +47,7 @@ describe('Given I open ghost page', () => {
                 })
             })
             .catch(error => console.error(error))
+            MysqlHelper.cleanIpCounter();
     });
 
     describe('test mock page created', () => {
@@ -69,7 +71,7 @@ describe('Given I open ghost page', () => {
     });
 
 
-    fdescribe('test faker page created', () => {
+    describe('test faker page created', () => {
         for(let i = 0 ; i<6;i++)
         {
             let title = faker.name.title();
