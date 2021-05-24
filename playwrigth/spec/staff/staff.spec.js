@@ -1,6 +1,7 @@
 const playwright = require('playwright');
 const { Login } = require('../../src/login.page')
 const { Staff } = require('../../src/staff.page')
+const { MysqlHelper } = require('../../src/mysql/mysql')
 const config = require('config');
 const url = `${config.url}/#/signin`;
 const urlStaff = `${config.url}/#/staff`;
@@ -122,5 +123,6 @@ describe('Given I open ghost page', () => {
     afterEach(async () => {
         console.log('Browser Context Closed!')
         await context.close();
+        MysqlHelper.cleanIpCounter();
     });
 });

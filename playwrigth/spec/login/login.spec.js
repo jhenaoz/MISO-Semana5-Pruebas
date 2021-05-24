@@ -1,5 +1,6 @@
 const playwright = require('playwright');
 const { Login } = require('../../src/login.page')
+const { MysqlHelper } = require('../../src/mysql/mysql')
 const config = require('config');
 const url = `${config.url}/#/signin`;
 
@@ -20,6 +21,7 @@ describe('Given I open ghost page', () => {
 
     afterEach(async () => {
         await context.close();
+        MysqlHelper.cleanIpCounter();
     });
 
     describe('When i login as an admin user', () => {
