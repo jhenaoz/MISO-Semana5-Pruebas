@@ -8,39 +8,13 @@ IMPORTANTE: LA APLICACION DE GHOST LA DESPLEGAMOS EN HEROKU, ENTONCES A LA HORA 
 
 GRACIAS POR SU COMPRENSION 😁
 
-Tambien pueden acceder a estas urls para estar seguros que heroku tiene la aplicacion arribar
-https://ghost3-42-5.herokuapp.com/ghost/
-https://ghost3-3-0.herokuapp.com/ghost/
-
-# Visual Tests
+Tambien puede acceder a estas url para estar seguros que heroku tiene la aplicacion arriba:
+#### https://ghost3-42-5.herokuapp.com/ghost/
+# Run  Tests
 ```shell
-  cd playwright
-  npm run visualtestresemble
-
-  # For backstop Tests
-  npm run images-server
-  npm run visualtestbackstop
-```
-
-
-Cypress:
-```shell
-  cd cypress
-  npm i
-  npx cypress open --config-file cypress3.3.0.json
-  npx cypress open --config-file cypress3.42.5.json
-```
-Ejecutar las pruebas:
-![image](https://user-images.githubusercontent.com/2055110/117755826-96766980-b1e2-11eb-9094-f1c71a17ad5e.png)
-
-Playwright
-```shell
-  cd playwright
-  npm i
+  npm install
   npm test
 ```
-
-
 ## Funcionalidades
 
 - Login (juan)
