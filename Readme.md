@@ -178,3 +178,8 @@ Feature: Ghost staff Page
         When I delete unsent email with email
         Then I see "Invitation revoked" in the page
 ```
+## Pruebas Exploratorias
+* [Archivo Pruebas Exploratorias](https://uniandes-my.sharepoint.com/:x:/g/personal/z_alarcon_uniandes_edu_co/ES4mxYQ4d-tJpvFh87hKwUYB2A8SbC67724G96gOVKPC9g?e=lXSR1o) 
+
+## Video final
+* [Video Final](https://youtu.be/H8_BCadVA2U) 
