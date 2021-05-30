@@ -1,5 +1,5 @@
 module.exports = {
-  "url": "https://ghost3-3-0.herokuapp.com/ghost",
+  "url": "https://ghost3-42-5.herokuapp.com/ghost",
   "adminUser": {
     "email": "admin-user@mailsac.com",
     "password": "Test4echo!"

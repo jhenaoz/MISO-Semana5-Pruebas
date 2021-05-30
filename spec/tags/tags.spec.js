@@ -50,27 +50,25 @@ describe('Given I open ghost page Tags', () => {
 
 
     describe('I create a tags faker', () => {
-        for (let i = 0; i<6;i++) {
-            let nameTag = faker.name.title();
-            describe(`When I create a tags with name ${nameTag}`, () => {
-                beforeEach(async () => {
-                    await loginPage.login(config.adminUser.email, config.adminUser.password);
-                    let text = await page.textContent('.gh-user-email');
-                    await page.goto(tagsUrl);
-                    await page.screenshot({path: `${config.imagePath}/tags-page.png`});
-                    text = await page.textContent('#tag-name');
-                    await tagsPage.create(nameTag);
-                    await page.goto(tagsUrlBase);
-                    text = await page.click('text=\'Public tags\'');
-                    await page.screenshot({path:`${config.imagePath}/tags-page-create.png`});
-                });
-        
-                it('Then The tags "'+nameTag+'" should be created', async () => {
-                    const text_ = await page.textContent('.gh-tag-list-name');
-                    expect(text_).toContain(nameTag);
-                });
+        let nameTag = faker.name.title();
+        describe(`When I create a tags with name ${nameTag}`, () => {
+            beforeEach(async () => {
+                await loginPage.login(config.adminUser.email, config.adminUser.password);
+                let text = await page.textContent('.gh-user-email');
+                await page.goto(tagsUrl);
+                await page.screenshot({path: `${config.imagePath}/tags-page.png`});
+                text = await page.textContent('#tag-name');
+                await tagsPage.create(nameTag);
+                await page.goto(tagsUrlBase);
+                text = await page.click('text=\'Public tags\'');
+                await page.screenshot({path:`${config.imagePath}/tags-page-create.png`});
             });
-        }    
+    
+            it('Then The tags "'+nameTag+'" should be created', async () => {
+                const text_ = await page.textContent('.gh-tag-list-name');
+                expect(text_).toContain(nameTag);
+            });
+        });
     });
    
 

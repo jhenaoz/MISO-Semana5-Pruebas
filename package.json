@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test3.42.5",
-    "test3.42.5": "NODE_ENV=3.42.5 jasmine || exit 0"
+    "test": "NODE_ENV=3.42.5 jasmine || exit 0"
   },
   "author": "",
   "license": "ISC",

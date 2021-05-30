@@ -22,7 +22,7 @@ describe('Given I open ghost page', () => {
 
     beforeEach(async () => {
         browser = await playwright['chromium'].launch();
-        context = await browser.newContext({ recordVideo: { dir: 'videos/' } });
+        context = await browser.newContext();
         page = await context.newPage();
         loginPage = new Login(page);
         dashboardPage = new Dashboard(page);
@@ -72,25 +72,21 @@ describe('Given I open ghost page', () => {
 
 
     describe('test faker page created', () => {
-        for(let i = 0 ; i<6;i++)
-        {
-            let title = faker.name.title();
-            let body = faker.name.title();
-            describe(`When I create a page with title ${title} and body ${body}`, () => {
-                beforeEach(async () => {
-                    await loginPage.login(config.adminUser.email, config.adminUser.password);
-                    await dashboardPage.navigateToPages();
-                    await pagePageObject.createPage(title, body);
-                    await page.screenshot({ path: `${config.imagePath}/page-create.png` });
-                });
-
-                it(`The page ${title} should be created`, async () => {
-                    const textContent = await page.textContent(`h3.gh-content-entry-title:has-text("${title}")`)
-                    expect(title).toBe(textContent.trim());
-                });
+        let title = faker.name.title();
+        let body = faker.name.title();
+        describe(`When I create a page with title ${title} and body ${body}`, () => {
+            beforeEach(async () => {
+                await loginPage.login(config.adminUser.email, config.adminUser.password);
+                await dashboardPage.navigateToPages();
+                await pagePageObject.createPage(title, body);
+                await page.screenshot({ path: `${config.imagePath}/page-create.png` });
             });
-            
-        }
+
+            it(`The page ${title} should be created`, async () => {
+                const textContent = await page.textContent(`h3.gh-content-entry-title:has-text("${title}")`)
+                expect(title).toBe(textContent.trim());
+            });
+        });
     });
 
     describe('test mock page update', () => {

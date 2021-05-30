@@ -1,7 +1,7 @@
-const playwright = require('playwright');
-const { Login } = require('../../src/login.page')
-const { MysqlHelper } = require('../../src/mysql/mysql')
 const config = require('config');
+const playwright = require('playwright');
+const { Login } = require('../../src/login.page');
+const { MysqlHelper } = require('../../src/mysql/mysql')
 const url = `${config.url}/#/signin`;
 
 describe('Given I open ghost page', () => {
@@ -13,7 +13,7 @@ describe('Given I open ghost page', () => {
 
     beforeEach(async () => {
         browser = await playwright['chromium'].launch();
-        context = await browser.newContext({ recordVideo: { dir: 'videos/' } });
+        context = await browser.newContext();
         page = await context.newPage();
         loginPage = new Login(page);
         await page.goto(url);
