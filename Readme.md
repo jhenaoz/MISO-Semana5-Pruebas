@@ -180,7 +180,7 @@ Feature: Ghost staff Page
 ```
 
 ## Estrategia
-* [Link Estrategia](https://docs.google.com/document/d/1S6-oOSsDDM6mglBRIb1q09qhreiE5oNMdv_30FiaDyI/edit?usp=sharing) 
+* [Link Estrategia](https://docs.google.com/document/d/1keU9YcW-VbHxvUoNbk1h1YyWofrqfS712CIN0QNp9mA/edit?usp=sharing) 
 
 ## Pruebas Exploratorias
 * [Archivo Pruebas Exploratorias](https://uniandes-my.sharepoint.com/:x:/g/personal/z_alarcon_uniandes_edu_co/ES4mxYQ4d-tJpvFh87hKwUYB2A8SbC67724G96gOVKPC9g?e=lXSR1o) 
